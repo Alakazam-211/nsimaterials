@@ -149,13 +149,7 @@ export async function POST(request: NextRequest) {
     // According to QuickBase API spec: base URL is api.quickbase.com/v1, realm goes in header
     const apiUrl = `https://api.quickbase.com/v1/records`;
     
-    console.log('Submitting order to QuickBase:', {
-      tableId: orderSubmissionsTableId,
-      realmHostname: cleanRealmHostname,
-      apiUrl,
-      hasToken: !!userToken,
-      data: orderSubmissionData,
-    });
+    // Removed console.log to prevent sensitive information leakage (realmHostname, token presence)
 
     let orderSubmissionResponse;
     try {
@@ -170,12 +164,8 @@ export async function POST(request: NextRequest) {
         body: JSON.stringify(orderSubmissionData),
       });
     } catch (fetchError) {
-      console.error('Fetch error details:', {
-        message: fetchError instanceof Error ? fetchError.message : String(fetchError),
-        cause: fetchError instanceof Error ? (fetchError as any).cause : undefined,
-        url: apiUrl,
-        realmHostname: cleanRealmHostname,
-      });
+      // Removed console.error to prevent sensitive information leakage (realmHostname)
+      // Error details are still returned in the API response for debugging
       return NextResponse.json(
         { 
           error: `Network error connecting to QuickBase: ${fetchError instanceof Error ? fetchError.message : String(fetchError)}`,

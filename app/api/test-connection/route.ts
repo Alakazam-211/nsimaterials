@@ -53,7 +53,7 @@ export async function GET(request: NextRequest) {
         userToken: {
           present: !!userToken,
           length: userToken?.length || 0,
-          preview: userToken ? `${userToken.substring(0, 10)}...` : 'not set',
+          // Removed preview to prevent token leakage
         },
         orderSubmissionsTableId: {
           value: orderSubmissionsTableId,

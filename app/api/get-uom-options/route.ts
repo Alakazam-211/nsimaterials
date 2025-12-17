@@ -55,9 +55,7 @@ export async function GET(request: NextRequest) {
 
     // Step 1: Fetch table fields to find the UOM value field
     const fieldsUrl = `https://api.quickbase.com/v1/fields?tableId=${uomTableId}`;
-    console.log('Fetching fields from:', fieldsUrl);
-    console.log('Realm hostname:', cleanRealmHostname);
-    console.log('User token present:', !!userToken);
+    // Removed console logs to prevent sensitive information leakage
     
     let fieldsResponse;
     try {

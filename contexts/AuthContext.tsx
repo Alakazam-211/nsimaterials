@@ -138,7 +138,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     await createUserWithEmailAndPassword(auth, email, password);
   };
 
-  const loginWithGoogle = async (useRedirect: boolean = false) => {
+  const loginWithGoogle = async (useRedirect: boolean = false): Promise<void> => {
     if (!auth) {
       throw new Error('Firebase auth is not initialized. Please check your environment variables.');
     }
@@ -158,10 +158,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         // The auth state will update via onAuthStateChanged listener
       } else {
         // Use popup - better UX, no redirect issues, recommended method
-        const result = await signInWithPopup(auth, provider);
+        await signInWithPopup(auth, provider);
         // The popup will close automatically after successful sign-in
         // The auth state will update via onAuthStateChanged listener
-        return result;
       }
     } catch (error: any) {
       // Re-throw the error so it can be handled by the component

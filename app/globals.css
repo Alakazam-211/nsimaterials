@@ -1,0 +1,12 @@
+@import '../styles/glassmorphic.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0a6b46 0%, #084d33 50%, #0d8a5a 100%);
+  background-attachment: fixed;
+}
+
